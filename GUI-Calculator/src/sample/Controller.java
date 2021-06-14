@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import main.MyCalculator;
+
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Controller {
@@ -37,9 +39,15 @@ public class Controller {
             }
             i++;
         }
-        num1 = Double.parseDouble(input.substring(0,i));
-        num2 = Double.parseDouble(input.substring(i + 1));
-        label.setText(Objects.requireNonNull(calculate(num1, num2, opr)).toString());
+        try {
+            num1 = Double.parseDouble(input.substring(0, i));
+            num2 = Double.parseDouble(input.substring(i + 1));
+            Double res = calculate(num1, num2, opr);
+            label.setText(Objects.requireNonNull(new DecimalFormat().format(res)));
+        } catch (NumberFormatException e) {
+            label.setText("Invalid Input!");
+            resetInput();
+        }
     }
 
     @FXML
