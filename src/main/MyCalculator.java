@@ -19,16 +19,16 @@ public class MyCalculator implements Calculator {
         return Math.pow(a,b);
     }
     public double sin(double a) {
-        return Math.sin(a);
+        return Math.sin(Math.toRadians(a));
     }
     public double cos(double a) {
-        return Math.cos(a);
+        return Math.cos(Math.toRadians(a));
     }
     public double tan(double a) {
-        return Math.tan(a);
+        return Math.tan(Math.toRadians(a));
     }
     public Double cot(double a) {
-        double b = Math.tan(a);
+        double b = Math.tan(Math.toRadians(a));
         if (b == 0) {
             return null;
         }

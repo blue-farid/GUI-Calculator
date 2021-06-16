@@ -41,9 +41,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="BOTTOM_CENTER" prefHeight="357.0" prefWidth="273.0" style="-fx-background-color: #f8f8ff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="BOTTOM_CENTER" onKeyPressed="#keyPressed" prefHeight="357.0" prefWidth="273.0" style="-fx-background-color: #f8f8ff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="68.0" prefWidth="273.0">
+      <HBox alignment="CENTER_LEFT" focusTraversable="true" prefHeight="68.0" prefWidth="273.0">
          <children>
             <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="   GUI-Calculator" wrappingWidth="212.19200897216797">
                <font>
@@ -53,22 +53,25 @@
                   <Insets top="20.0" />
                </HBox.margin>
             </Text>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#acButton" prefHeight="40.0" prefWidth="40.0" text="AC" textAlignment="CENTER" underline="true">
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#acButton" prefHeight="40.0" prefWidth="40.0" text="AC" textAlignment="CENTER" underline="true">
                <HBox.margin>
                   <Insets left="3.0" top="20.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="53.0" prefWidth="100.0" spacing="10.0">
+      <HBox alignment="CENTER_LEFT" focusTraversable="true" prefHeight="53.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <TextField fx:id="textField" alignment="CENTER" editable="false" prefHeight="41.0" prefWidth="140.0">
+            <TextField fx:id="textField" alignment="CENTER" editable="false" focusTraversable="false" prefHeight="41.0" prefWidth="140.0">
                <HBox.margin>
                   <Insets left="17.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="^" />
-            <Button alignment="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#backButton" prefHeight="40.0" prefWidth="41.0" text="Back" textAlignment="CENTER">
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="^" textAlignment="CENTER" />
+            <Button alignment="CENTER" ellipsisString="" focusTraversable="false" mnemonicParsing="false" onAction="#backButton" prefHeight="40.0" prefWidth="41.0" text="Back" textAlignment="CENTER">
                <HBox.margin>
                   <Insets right="17.0" />
                </HBox.margin>
@@ -78,43 +81,43 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="278.0" spacing="10.0">
+      <HBox alignment="CENTER" focusTraversable="true" prefHeight="46.0" prefWidth="278.0" spacing="10.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="7" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="8" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="9" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="/" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#cosButton" prefHeight="40.0" prefWidth="40.0" text="cos" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="7" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="8" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="9" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="/" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#cosButton" prefHeight="40.0" prefWidth="40.0" text="cos" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="278.0" spacing="10.0">
+      <HBox alignment="CENTER" focusTraversable="true" prefHeight="46.0" prefWidth="278.0" spacing="10.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="4" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="5" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="6" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="*" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#sinButton" prefHeight="40.0" prefWidth="40.0" text="sin" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="4" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="5" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="6" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="*" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#sinButton" prefHeight="40.0" prefWidth="40.0" text="sin" />
          </children>
          <VBox.margin>
             <Insets />
          </VBox.margin>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="45.0" prefWidth="278.0" spacing="10.0">
+      <HBox alignment="CENTER" focusTraversable="true" prefHeight="45.0" prefWidth="278.0" spacing="10.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="3" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="-" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#cotButton" prefHeight="40.0" prefWidth="40.0" text="cot" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="1" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="2" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="3" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="-" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#cotButton" prefHeight="40.0" prefWidth="40.0" text="cot" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="48.0" prefWidth="216.0" spacing="10.0">
+      <HBox alignment="CENTER" focusTraversable="true" prefHeight="48.0" prefWidth="216.0" spacing="10.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="0" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="." />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="=" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="+" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#tanButton" prefHeight="40.0" prefWidth="40.0" text="tan" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="0" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="." />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="=" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#button" prefHeight="40.0" prefWidth="40.0" text="+" />
+            <Button alignment="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#tanButton" prefHeight="40.0" prefWidth="40.0" text="tan" />
          </children>
          <opaqueInsets>
             <Insets />

@@ -11,4 +11,12 @@ public enum Operand {
     public char getOpr() {
         return opr;
     }
+    public static boolean isOperand(char opr) {
+        for (Operand operand: Operand.values()) {
+            if (operand.getOpr() == opr) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
