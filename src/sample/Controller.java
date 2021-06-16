@@ -4,22 +4,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import main.MyCalculator;
-
 import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class Controller {
+
     private MyCalculator calculator = new MyCalculator();
     private boolean afterReceiveAnswer = false;
-    @FXML
-    private TextField textField = new TextField();
+    @FXML private TextField textField = new TextField();
     @FXML
     private void button(ActionEvent ae) {
-        String str = ((Button) ae.getSource()).getText();
+        buttonPressed(((Button)ae.getSource()).getText());
+    }
+    private void buttonPressed(String str) {
         if (isAfterReceiveAnswer()) {
             boolean state = false;
-            for (Operand operand: Operand.values()) {
+            for (Operand operand : Operand.values()) {
                 String operandStr = "" + operand.getOpr();
                 if (str.equals(operandStr)) {
                     state = true;
@@ -38,6 +41,24 @@ public class Controller {
         }
     }
 
+    @FXML
+    private void keyPressed(KeyEvent ae) {
+        boolean isOperand = false;
+        try {
+            isOperand = Operand.isOperand(ae.getText().charAt(0));
+        } catch (StringIndexOutOfBoundsException e) {}
+        if (ae.getCode().isDigitKey() || ae.getCode().isKeypadKey() ||
+                ae.getCode() == KeyCode.EQUALS || ae.getCode() == KeyCode.PERIOD ||
+                isOperand || ae.getText().equals(".")) {
+            buttonPressed(ae.getText());
+        } else if (ae.getCode() == KeyCode.ESCAPE) {
+            acButton(new ActionEvent());
+        } else if (ae.getCode() == KeyCode.BACK_SPACE) {
+            backButton(new ActionEvent());
+        } else if (ae.getCode() == KeyCode.ENTER) {
+            buttonPressed("=");
+        }
+    }
     @FXML
     private void backButton(ActionEvent ae) {
         try {
@@ -99,25 +120,25 @@ public class Controller {
     @FXML
     private void sinButton(ActionEvent ae) {
         try {
-            setInput(Double.toString(calculator.sin(Objects.requireNonNull(inputToDouble()))));
+            setInput(calculator.sin(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
     }
     @FXML
     private void cosButton(ActionEvent ae) {
         try {
-            setInput(Double.toString(calculator.cos(Objects.requireNonNull(inputToDouble()))));
+            setInput(calculator.cos(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
     }
     @FXML
     private void tanButton(ActionEvent ae) {
         try {
-            setInput(Double.toString(calculator.tan(Objects.requireNonNull(inputToDouble()))));
+            setInput(calculator.tan(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
     }
     @FXML
     private void cotButton(ActionEvent ae) {
         try {
-            setInput(Double.toString(calculator.cot(Objects.requireNonNull(inputToDouble()))));
+            setInput(calculator.cot(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
     }
     private void invalidInput() {
@@ -143,8 +164,8 @@ public class Controller {
         }
         return null;
     }
-    private void setInput(String str) {
-        textField.setText(str);
+    private void setInput(double num) {
+        textField.setText(new DecimalFormat().format(num));
     }
     private String getInput() {
         return textField.getText();
