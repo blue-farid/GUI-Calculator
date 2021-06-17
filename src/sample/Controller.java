@@ -143,7 +143,7 @@ public class Controller {
             num2 = Double.parseDouble(input.substring(i + 1));
             Double res = calculate(num1, num2, opr);
             textField.setText(Objects.requireNonNull(new DecimalFormat().format(res)));
-        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException | IllegalArgumentException e) {
             invalidInput();
         }
     }
