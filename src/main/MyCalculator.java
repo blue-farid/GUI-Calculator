@@ -1,5 +1,10 @@
 package main;
+
+/**
+ * My calculator.
+ */
 public class MyCalculator implements Calculator {
+
     public double sum(double a, double b) {
         return a + b;
     }
@@ -10,6 +15,7 @@ public class MyCalculator implements Calculator {
         return a * b;
     }
     public Double division(double a, double b) {
+        // to avoiding "division by zero" error.
         if (b == 0) {
             return null;
         }
@@ -24,12 +30,16 @@ public class MyCalculator implements Calculator {
     public double cos(double a) {
         return Math.cos(Math.toRadians(a));
     }
-    public double tan(double a) {
+    public Double tan(double a) {
+        if (a != 0 && a % 90 == 0 && (a / 90) % 2 != 0) {
+            return null;
+        }
         return Math.tan(Math.toRadians(a));
     }
     public Double cot(double a) {
         double b = Math.tan(Math.toRadians(a));
-        if (b == 0) {
+        // to avoiding "division by zero" error.
+        if (a % 180 == 0) {
             return null;
         }
         return 1 / b;

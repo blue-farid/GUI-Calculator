@@ -10,16 +10,33 @@ import main.MyCalculator;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
+/**
+ * Controller.
+ */
 public class Controller {
 
+    // a Calculator.
     private MyCalculator calculator = new MyCalculator();
+    // a boolean to determine a specific state.
     private boolean afterReceiveAnswer = false;
+    // TextField of the calculator.
     @FXML private TextField textField = new TextField();
+
+    /** any normal buttons that has got clicked, except some special one
+     * (like AC,Back, sin, cos...) will send an ActionEvent to this method.
+     * @param ae
+     */
+
     @FXML
     private void button(ActionEvent ae) {
         buttonPressed(((Button)ae.getSource()).getText());
     }
-    private void buttonPressed(String str) {
+
+    /** that will do the required works after a button has been pressed.
+     *
+     * @param str
+     */
+    public void buttonPressed(String str) {
         if (isAfterReceiveAnswer()) {
             boolean state = false;
             for (Operand operand : Operand.values()) {
@@ -41,26 +58,42 @@ public class Controller {
         }
     }
 
+    /** that will do the required works after a key pressed.
+     *
+     * @param ae
+     */
     @FXML
     private void keyPressed(KeyEvent ae) {
+        // that will show, the key was an operand key or not.
         boolean isOperand = false;
+        // to determine the key was operand or not.
         try {
             isOperand = Operand.isOperand(ae.getText().charAt(0));
         } catch (StringIndexOutOfBoundsException e) {}
+        // to determine the key is a normal key or a special key.
         if (ae.getCode().isDigitKey() || ae.getCode().isKeypadKey() ||
                 ae.getCode() == KeyCode.EQUALS || ae.getCode() == KeyCode.PERIOD ||
                 isOperand || ae.getText().equals(".")) {
+            // pass the button text to normal key method.
             buttonPressed(ae.getText());
+            // Escape key has been synced to AC button.
         } else if (ae.getCode() == KeyCode.ESCAPE) {
             acButton(new ActionEvent());
+            // BackSpace key has been synced to Back button.
         } else if (ae.getCode() == KeyCode.BACK_SPACE) {
             backButton(new ActionEvent());
+            // Enter key has been synced to
         } else if (ae.getCode() == KeyCode.ENTER) {
             buttonPressed("=");
         }
     }
+
+    /** that deletes a character of the input and set the new string to the text field.
+     *
+     * @param ae
+     */
     @FXML
-    private void backButton(ActionEvent ae) {
+    public void backButton(ActionEvent ae) {
         try {
             textField.setText(textField.getText().substring(0,textField.getLength() - 1));
         } catch (StringIndexOutOfBoundsException e) {
@@ -68,14 +101,27 @@ public class Controller {
         }
     }
 
+    /**
+     * Sets after receive answer.
+     *
+     * @param afterReceiveAnswer the after receive answer
+     */
     public void setAfterReceiveAnswer(boolean afterReceiveAnswer) {
         this.afterReceiveAnswer = afterReceiveAnswer;
     }
 
+    /**
+     * Is after receive answer boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAfterReceiveAnswer() {
         return afterReceiveAnswer;
     }
 
+    /**
+     * that will process the input to do the write thing.
+     */
     private void processInput() {
         char opr = 0;
         double num1 = 0;
@@ -102,11 +148,19 @@ public class Controller {
         }
     }
 
+    /**
+     * that will reset input when AC button pressed.
+     * @param ae
+     */
     @FXML
     private void acButton(ActionEvent ae) {
         resetInput();
     }
 
+    /**
+     * that will convert input to double.
+     * @return input that has been converted to double.
+     */
     private Double inputToDouble() {
         double num = 0;
         try {
@@ -117,39 +171,84 @@ public class Controller {
         }
         return num;
     }
+
+    /**
+     * that will calculate sine of input when sine button pressed.
+     * @param ae
+     */
     @FXML
     private void sinButton(ActionEvent ae) {
         try {
             setInput(calculator.sin(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
     }
+
+    /**
+     * that will calculate cosine of input when cosine button pressed.
+     * @param ae
+     */
     @FXML
     private void cosButton(ActionEvent ae) {
         try {
             setInput(calculator.cos(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
     }
+
+    /**
+     * that will calculate tangent of input when tangent button pressed.
+     * @param ae
+     */
     @FXML
     private void tanButton(ActionEvent ae) {
         try {
             setInput(calculator.tan(Objects.requireNonNull(inputToDouble())));
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+            invalidInput();
+        }
     }
+
+    /**
+     * that will calculate cotangent of input when cotangent button pressed.
+     * @param ae
+     */
     @FXML
     private void cotButton(ActionEvent ae) {
         try {
             setInput(calculator.cot(Objects.requireNonNull(inputToDouble())));
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+            invalidInput();
+        }
     }
+
+    /**
+     * that will set input to a suitable message when an invalid input typed.
+     */
     private void invalidInput() {
         textField.setText("invalid input!");
     }
+
+    /**
+     * that add a string to input.
+     * @param str
+     */
     private void addInput(String str) {
         textField.setText(textField.getText() + str);
     }
+
+    /**
+     * that clear the input.
+     */
     private void resetInput() {
         textField.setText("");
     }
+
+    /**
+     * that calculate with using the calculator object based on its param.
+     * @param a
+     * @param b
+     * @param opr
+     * @return
+     */
     private Double calculate(double a, double b, char opr) {
         if (opr == Operand.SUM.getOpr()) {
             return calculator.sum(a,b);
@@ -164,9 +263,25 @@ public class Controller {
         }
         return null;
     }
+
+    /**
+     * set input to a double.
+     * @param num
+     */
     private void setInput(double num) {
         textField.setText(new DecimalFormat().format(num));
     }
+
+    /**
+     * set input to a string.
+     * @param str
+     */
+    private void setInput(String str) {
+        textField.setText(str);
+    }
+    /**
+     * @return the input string
+     */
     private String getInput() {
         return textField.getText();
     }
