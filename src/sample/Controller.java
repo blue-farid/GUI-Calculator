@@ -94,6 +94,10 @@ public class Controller {
      */
     @FXML
     public void backButton(ActionEvent ae) {
+        if (isAfterReceiveAnswer()) {
+            resetInput();
+            setAfterReceiveAnswer(false);
+        }
         try {
             textField.setText(textField.getText().substring(0,textField.getLength() - 1));
         } catch (StringIndexOutOfBoundsException e) {
@@ -173,11 +177,32 @@ public class Controller {
     }
 
     /**
-     * that will calculate sine of input when sine button pressed.
+     * that method call when a trigonometric button pressed.
      * @param ae
      */
     @FXML
-    private void sinButton(ActionEvent ae) {
+    public void trigonometricFuncs(ActionEvent ae) {
+        String opr = ((Button)ae.getSource()).getText();
+        switch (opr) {
+            case "sin":
+                sinButton();
+                break;
+            case "cos":
+                cosButton();
+                break;
+            case "tan":
+                tanButton();
+                break;
+            case "cot":
+                cotButton();
+                break;
+        }
+        setAfterReceiveAnswer(true);
+    }
+    /**
+     * that will calculate sine of input when sine button pressed.
+     */
+    private void sinButton() {
         try {
             setInput(calculator.sin(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
@@ -185,10 +210,8 @@ public class Controller {
 
     /**
      * that will calculate cosine of input when cosine button pressed.
-     * @param ae
      */
-    @FXML
-    private void cosButton(ActionEvent ae) {
+    private void cosButton() {
         try {
             setInput(calculator.cos(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {}
@@ -196,10 +219,8 @@ public class Controller {
 
     /**
      * that will calculate tangent of input when tangent button pressed.
-     * @param ae
      */
-    @FXML
-    private void tanButton(ActionEvent ae) {
+    private void tanButton() {
         try {
             setInput(calculator.tan(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {
@@ -209,10 +230,8 @@ public class Controller {
 
     /**
      * that will calculate cotangent of input when cotangent button pressed.
-     * @param ae
      */
-    @FXML
-    private void cotButton(ActionEvent ae) {
+    private void cotButton() {
         try {
             setInput(calculator.cot(Objects.requireNonNull(inputToDouble())));
         } catch (NullPointerException e) {
