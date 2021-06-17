@@ -4,6 +4,14 @@ package main;
  * Calculator Interface.
  */
 public interface Calculator {
+
+    /**
+     * Sum double.
+     *
+     * @param a the a
+     * @param b the b
+     * @return a + b
+     */
     double sum(double a, double b);
 
     /**
@@ -11,7 +19,7 @@ public interface Calculator {
      *
      * @param a the a
      * @param b the b
-     * @return the double
+     * @return a - b
      */
     double subtract(double a,double b);
 
